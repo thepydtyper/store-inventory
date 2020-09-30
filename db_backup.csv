@@ -1,0 +1,109 @@
+product_id,product_name,product_price,product_quantity,date_updated
+1,Bagel - Whole White Sesame,430,,2018-11-01 00:00:00
+2,Bagel - Whole White Sesame,430,,2018-11-01 00:00:00
+3,Sauce - Caesar Dressing,805,,2018-12-28 00:00:00
+4,Sauce - Caesar Dressing,805,,2018-12-28 00:00:00
+5,Shiratamako - Rice Flour,799,,2018-03-07 00:00:00
+6,Shiratamako - Rice Flour,799,,2018-03-07 00:00:00
+7,Tart - Raisin And Pecan,106,,2019-01-18 00:00:00
+8,Tart - Raisin And Pecan,106,,2019-01-18 00:00:00
+9,Radish,247,,2018-11-06 00:00:00
+10,Radish,247,,2018-11-06 00:00:00
+11,Juice - V8 Splash,125,,2018-01-10 00:00:00
+12,Juice - V8 Splash,125,,2018-01-10 00:00:00
+13,Red Currants,677,,2018-10-01 00:00:00
+14,Red Currants,677,,2018-10-01 00:00:00
+15,Soup - Base Broth Beef,544,,2019-03-09 00:00:00
+16,Soup - Base Broth Beef,544,,2019-03-09 00:00:00
+17,Tomatoes Tear Drop Yellow,64,,2019-02-09 00:00:00
+18,Tomatoes Tear Drop Yellow,64,,2019-02-09 00:00:00
+19,Mussels - Cultivated,934,,2018-07-31 00:00:00
+20,Mussels - Cultivated,934,,2018-07-31 00:00:00
+21,"Bread - Crumbs, Bulk",449,,2019-01-12 00:00:00
+22,"Bread - Crumbs, Bulk",449,,2019-01-12 00:00:00
+23,"Beans - Long, Chinese",473,,2018-09-22 00:00:00
+24,"Beans - Long, Chinese",473,,2018-09-22 00:00:00
+25,"Beans - Navy, Dry",460,,2018-01-20 00:00:00
+26,"Beans - Navy, Dry",460,,2018-01-20 00:00:00
+27,Juice - V8 Splash,115,,2018-01-13 00:00:00
+28,Juice - V8 Splash,115,,2018-01-13 00:00:00
+29,"Basil - Dry, Rubbed",869,,2018-02-04 00:00:00
+30,"Basil - Dry, Rubbed",869,,2018-02-04 00:00:00
+31,Apple - Granny Smith,506,,2018-01-12 00:00:00
+32,Apple - Granny Smith,506,,2018-01-12 00:00:00
+33,"Lid - High Heat, Super Clear",123,,2018-02-09 00:00:00
+34,"Lid - High Heat, Super Clear",123,,2018-02-09 00:00:00
+35,Oranges - Navel,478,,2018-06-06 00:00:00
+36,Oranges - Navel,478,,2018-06-06 00:00:00
+37,Berry Brulee,759,,2018-08-25 00:00:00
+38,Berry Brulee,759,,2018-08-25 00:00:00
+39,Lobster - Canned Premium,761,,2018-04-15 00:00:00
+40,Lobster - Canned Premium,761,,2018-04-15 00:00:00
+41,Sauce - Caesar Dressing,825,,2019-04-10 00:00:00
+42,Sauce - Caesar Dressing,825,,2019-04-10 00:00:00
+43,Ham - Procutinni,570,,2019-01-09 00:00:00
+44,Ham - Procutinni,570,,2019-01-09 00:00:00
+45,Veal - Ground,767,,2018-12-19 00:00:00
+46,Veal - Ground,767,,2018-12-19 00:00:00
+47,Oil - Cooking Spray,420,,2018-06-11 00:00:00
+48,Oil - Cooking Spray,420,,2018-06-11 00:00:00
+49,"Extract - Vanilla,artificial",291,,2018-06-08 00:00:00
+50,"Extract - Vanilla,artificial",291,,2018-06-08 00:00:00
+51,"Mushroom - Porcini, Dry",814,,2018-07-26 00:00:00
+52,"Mushroom - Porcini, Dry",814,,2018-07-26 00:00:00
+53,Wine - Chateau Bonnet,741,,2018-03-10 00:00:00
+54,Wine - Chateau Bonnet,741,,2018-03-10 00:00:00
+55,Bagel - Whole White Sesame,430,,2018-11-01 00:00:00
+56,Bagel - Whole White Sesame,430,,2018-11-01 00:00:00
+57,Sauce - Caesar Dressing,805,,2018-12-28 00:00:00
+58,Sauce - Caesar Dressing,805,,2018-12-28 00:00:00
+59,Shiratamako - Rice Flour,799,,2018-03-07 00:00:00
+60,Shiratamako - Rice Flour,799,,2018-03-07 00:00:00
+61,Tart - Raisin And Pecan,106,,2019-01-18 00:00:00
+62,Tart - Raisin And Pecan,106,,2019-01-18 00:00:00
+63,Radish,247,,2018-11-06 00:00:00
+64,Radish,247,,2018-11-06 00:00:00
+65,Juice - V8 Splash,125,,2018-01-10 00:00:00
+66,Juice - V8 Splash,125,,2018-01-10 00:00:00
+67,Red Currants,677,,2018-10-01 00:00:00
+68,Red Currants,677,,2018-10-01 00:00:00
+69,Soup - Base Broth Beef,544,,2019-03-09 00:00:00
+70,Soup - Base Broth Beef,544,,2019-03-09 00:00:00
+71,Tomatoes Tear Drop Yellow,64,,2019-02-09 00:00:00
+72,Tomatoes Tear Drop Yellow,64,,2019-02-09 00:00:00
+73,Mussels - Cultivated,934,,2018-07-31 00:00:00
+74,Mussels - Cultivated,934,,2018-07-31 00:00:00
+75,"Bread - Crumbs, Bulk",449,,2019-01-12 00:00:00
+76,"Bread - Crumbs, Bulk",449,,2019-01-12 00:00:00
+77,"Beans - Long, Chinese",473,,2018-09-22 00:00:00
+78,"Beans - Long, Chinese",473,,2018-09-22 00:00:00
+79,"Beans - Navy, Dry",460,,2018-01-20 00:00:00
+80,"Beans - Navy, Dry",460,,2018-01-20 00:00:00
+81,Juice - V8 Splash,115,,2018-01-13 00:00:00
+82,Juice - V8 Splash,115,,2018-01-13 00:00:00
+83,"Basil - Dry, Rubbed",869,,2018-02-04 00:00:00
+84,"Basil - Dry, Rubbed",869,,2018-02-04 00:00:00
+85,Apple - Granny Smith,506,,2018-01-12 00:00:00
+86,Apple - Granny Smith,506,,2018-01-12 00:00:00
+87,"Lid - High Heat, Super Clear",123,,2018-02-09 00:00:00
+88,"Lid - High Heat, Super Clear",123,,2018-02-09 00:00:00
+89,Oranges - Navel,478,,2018-06-06 00:00:00
+90,Oranges - Navel,478,,2018-06-06 00:00:00
+91,Berry Brulee,759,,2018-08-25 00:00:00
+92,Berry Brulee,759,,2018-08-25 00:00:00
+93,Lobster - Canned Premium,761,,2018-04-15 00:00:00
+94,Lobster - Canned Premium,761,,2018-04-15 00:00:00
+95,Sauce - Caesar Dressing,825,,2019-04-10 00:00:00
+96,Sauce - Caesar Dressing,825,,2019-04-10 00:00:00
+97,Ham - Procutinni,570,,2019-01-09 00:00:00
+98,Ham - Procutinni,570,,2019-01-09 00:00:00
+99,Veal - Ground,767,,2018-12-19 00:00:00
+100,Veal - Ground,767,,2018-12-19 00:00:00
+101,Oil - Cooking Spray,420,,2018-06-11 00:00:00
+102,Oil - Cooking Spray,420,,2018-06-11 00:00:00
+103,"Extract - Vanilla,artificial",291,,2018-06-08 00:00:00
+104,"Extract - Vanilla,artificial",291,,2018-06-08 00:00:00
+105,"Mushroom - Porcini, Dry",814,,2018-07-26 00:00:00
+106,"Mushroom - Porcini, Dry",814,,2018-07-26 00:00:00
+107,Wine - Chateau Bonnet,741,,2018-03-10 00:00:00
+108,Wine - Chateau Bonnet,741,,2018-03-10 00:00:00
