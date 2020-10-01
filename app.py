@@ -11,7 +11,7 @@ db = SqliteDatabase("inventory.db")
 
 class Product(Model):
 
-    product_id = IntegerField(primary_key=True)
+    product_id = AutoField()
     product_name = CharField(max_length=255)
     product_quantity = IntegerField(default=0)
     product_price = IntegerField(default=0.0)
@@ -33,7 +33,7 @@ def menu_loop():
 
     # print if user doesn't type v, a, or b, then reloop
     choice = None
-    while choice not in ['q', 'a', 'v', 'b']:
+    while choice != 'q':
         print("\n--Inventory System--\n")
         for key, value in menu.items():
             print(f"{key}) {value.__doc__}")
@@ -67,6 +67,7 @@ def build_database(data):
 
     for row in data:
         try:
+            print(f"adding {row}")
             Product.create(
                 product_name = row["product_name"],
                 product_price = row["product_price"],
@@ -82,18 +83,67 @@ def build_database(data):
             product.save()
 
 
-def show_by_id():
+def show_by_id(id=None):
     """show item by id"""
 
     #print error if ID doesn't exist
-    print("showing id..")
+    while True:
+        try:
+            prod_id = input("Enter product's ID: >> ")
+            prod_id = int(prod_id)
+            break
+        except ValueError:
+            print("ERROR: a NUMBER not entered!")
+
+    items = Product.select().where(Product.product_id == prod_id)
+    if items:
+        print("Products found: ")
+        for item in items:
+            print(f"    Product name: {item.product_name}")
+            print(f"\tProduct price: {item.product_price}")
+            print(f"\tProduct quantity: {item.product_quantity}")
+            print(f"\tDate updated: {item.date_updated}")
+    else:
+        print(f"ID {prod_id} not found!")
 
 
 def add_item():
     """add item to inventory"""
 
     #if dup found while trying to add, check which entry most recent and only save that data
-    print("adding item..")
+    prod_name = input("Enter product name: >> ")
+
+    while True:
+        try:
+            prod_amount = input("Enter amount: >> ")
+            prod_amount = int(prod_amount)
+            break
+        except ValueError:
+            print("ERROR: a NUMBER not entered!")
+            continue
+
+    while True:
+        try:
+            prod_price = input("Enter product price: >> ")
+            prod_price = float(prod_price)
+            break
+        except ValueError:
+            print("ERROR: a NUMBER must be entered!")
+            continue
+
+    try:
+        Product.create(
+            product_name = prod_name,
+            product_quantity = prod_amount,
+            product_price = prod_price,
+            date_updated = datetime.datetime.now()
+        ).save()
+    except IntegrityError:
+        product = Product.get(product_name = name)
+        product.product_quantity = quantity
+        product.product_price = price
+        product.date_updated = datetime.datetime.now()
+        product.save()
 
 
 def backup_database():
