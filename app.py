@@ -11,11 +11,11 @@ db = SqliteDatabase("inventory.db")
 
 class Product(Model):
 
-    product_id = AutoField()
-    product_name = CharField(max_length=255)
+    product_id = AutoField(primary_key=True)
+    product_name = CharField(unique=True)
     product_quantity = IntegerField(default=0)
-    product_price = IntegerField(default=0.0)
-    date_updated = DateTimeField(default=datetime.datetime.now)
+    product_price = IntegerField()
+    date_updated = DateTimeField()
 
     class Meta:
         database = db
@@ -24,8 +24,26 @@ class Product(Model):
 def initialize():
     db.connect()
     db.create_tables([Product], safe=True)
-    cleaned_data = clean_csv_data()
-    build_database(cleaned_data)
+
+    with open("inventory.csv", newline="") as csv_file:
+        reader = csv.DictReader(csv_file, delimiter=",")
+        prod_dicts = list(reader)
+
+        for prod in prod_dicts:
+            try:
+                Product.insert(
+                    product_name = prod["product_name"],
+                    product_quantity = prod["product_quantity"],
+                    product_price = prod["product_price"],
+                    date_updated = prod["dated_updated"]
+                ).execute()
+            except IntegrityError:
+                duplicate = Product.get(product_name = prod["product_name"])
+                if duplicate.date_updated <= prod["date_updated"]:
+                    duplicate.product_quantity = prod["product_quantity"]
+                    duplicate.product_price = prod["product_price"]
+                    duplicate.date_updated = prod["date_updated"]
+                    duplicate.save()
 
 
 def menu_loop():
@@ -42,6 +60,7 @@ def menu_loop():
         
         if choice in menu:
             clear()
+            print(f"calling up {menu[choice]()}")
             menu[choice]()
         else:
             print("ERROR: Please enter either: 'a', 'v', 'b', or 'q'\n")
@@ -67,14 +86,15 @@ def build_database(data):
 
     for row in data:
         try:
-            print(f"adding {row}")
-            Product.create(
+            Product.insert(
                 product_name = row["product_name"],
                 product_price = row["product_price"],
                 product_quantity = row["product_quantity"],
                 date_updated = row["date_updated"]
-            ).save()
+            ).execute()
+            print(f"created {row}")
         except IntegrityError:
+            print(f"error so adding {row}")
             product = Product.get(product_name=row["product_name"])
             product.product_name = row["product_name"]
             product.product_quantity = row["product_quantity"]
@@ -139,9 +159,9 @@ def add_item():
             date_updated = datetime.datetime.now()
         ).save()
     except IntegrityError:
-        product = Product.get(product_name = name)
-        product.product_quantity = quantity
-        product.product_price = price
+        product = Product.get(product_name = prod_name)
+        product.product_quantity = prod_amount
+        product.product_price = prod_price
         product.date_updated = datetime.datetime.now()
         product.save()
 
@@ -149,11 +169,10 @@ def add_item():
 def backup_database():
     """backup the database"""
 
+    headers = ["product_id", "product_name", "product_price", "product_quantity", "date_updated"]
     print("backinig up db..")
-    with open("db_backup.csv", 'w') as backup:
-        headers = ["product_id", "product_name", "product_price", "product_quantity", "date_updated"]
-        dbwriter = csv.DictWriter(backup, fieldnames=headers)
-
+    with open("db_backup.csv", 'w', newline="") as backup:
+        dbwriter = csv.DictWriter(backup, fieldnames=headers, delimiter=",")
         dbwriter.writeheader()
         
         inventory = Product.select()
