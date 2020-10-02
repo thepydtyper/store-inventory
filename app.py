@@ -12,9 +12,9 @@ db = SqliteDatabase("inventory.db")
 class Product(Model):
 
     product_id = AutoField(primary_key=True)
-    product_name = CharField(unique=True)
-    product_quantity = IntegerField(default=0)
+    product_name = TextField(unique=True)
     product_price = IntegerField()
+    product_quantity = IntegerField(default=0)    
     date_updated = DateTimeField()
 
     class Meta:
@@ -25,24 +25,24 @@ def initialize():
     db.connect()
     db.create_tables([Product], safe=True)
 
-    with open("inventory.csv", newline="") as csv_file:
+    with open("inventory.csv", newline='') as csv_file:
         reader = csv.DictReader(csv_file, delimiter=",")
         prod_dicts = list(reader)
 
         for prod in prod_dicts:
             try:
                 Product.insert(
-                    product_name = prod["product_name"],
-                    product_quantity = prod["product_quantity"],
-                    product_price = prod["product_price"],
-                    date_updated = prod["dated_updated"]
+                    product_name = prod["product_name"],                    
+                    product_price = fix_price(prod["product_price"]),
+                    product_quantity = fix_quantity(prod["product_quantity"]),
+                    date_updated = fix_date(prod["date_updated"])
                 ).execute()
             except IntegrityError:
                 duplicate = Product.get(product_name = prod["product_name"])
-                if duplicate.date_updated <= prod["date_updated"]:
-                    duplicate.product_quantity = prod["product_quantity"]
-                    duplicate.product_price = prod["product_price"]
-                    duplicate.date_updated = prod["date_updated"]
+                if duplicate.date_updated <= fix_date(prod["date_updated"]):
+                    duplicate.product_price = fix_price(prod["product_price"])
+                    duplicate.product_quantity = fix_quantity(prod["product_quantity"])                    
+                    duplicate.date_updated = fix_date(prod["date_updated"])
                     duplicate.save()
 
 
@@ -60,25 +60,26 @@ def menu_loop():
         
         if choice in menu:
             clear()
-            print(f"calling up {menu[choice]()}")
             menu[choice]()
         else:
             print("ERROR: Please enter either: 'a', 'v', 'b', or 'q'\n")
 
 
-def clean_csv_data():
-    """cleans fields from inventory.csv"""
+def fix_price(price):
 
-    with open("inventory.csv", newline="") as file:
-        data = csv.DictReader(file, delimiter=",")
-        rows = list(data)
+    fixed = price.replace("$", "")
+    fixed = int(float(fixed) * 100)
 
-        for row in rows:
-            row["product_quantity"] = int(row["product_quantity"])
-            row["product_price"] = int(row["product_price"].replace("$", "").replace(".", ""))
-            row["date_updated"] = datetime.datetime.strptime(row["date_updated"], "%m/%d/%Y")
-    
-    return rows
+    return fixed
+
+
+def fix_date(date):
+
+    return datetime.datetime.strptime(date, "%m/%d/%Y")
+
+def fix_quantity(quantity):
+
+    return int(quantity)
 
 
 def build_database(data):
@@ -119,7 +120,7 @@ def show_by_id(id=None):
     if items:
         print("Products found: ")
         for item in items:
-            print(f"    Product name: {item.product_name}")
+            print(f"\tProduct name: {item.product_name}")
             print(f"\tProduct price: {item.product_price}")
             print(f"\tProduct quantity: {item.product_quantity}")
             print(f"\tDate updated: {item.date_updated}")
@@ -172,7 +173,7 @@ def backup_database():
     headers = ["product_id", "product_name", "product_price", "product_quantity", "date_updated"]
     print("backinig up db..")
     with open("db_backup.csv", 'w', newline="") as backup:
-        dbwriter = csv.DictWriter(backup, fieldnames=headers, delimiter=",")
+        dbwriter = csv.DictWriter(backup, fieldnames=headers)
         dbwriter.writeheader()
         
         inventory = Product.select()
@@ -181,6 +182,7 @@ def backup_database():
                 "product_id": item.product_id,
                 "product_name": item.product_name,
                 "product_price": item.product_price,
+                "product_quantity": item.product_quantity,
                 "date_updated": item.date_updated
             })
 
