@@ -66,6 +66,7 @@ def menu_loop():
 
 
 def fix_price(price):
+    """given a price value, removes the $ sign and converts to an int"""
 
     fixed = price.replace("$", "")
     fixed = int(float(fixed) * 100)
@@ -77,31 +78,11 @@ def fix_date(date):
 
     return datetime.datetime.strptime(date, "%m/%d/%Y")
 
+
 def fix_quantity(quantity):
+    """converts the given quantity to an int"""
 
     return int(quantity)
-
-
-def build_database(data):
-    """adds cleaned data into the inventory.db file"""
-
-    for row in data:
-        try:
-            Product.insert(
-                product_name = row["product_name"],
-                product_price = row["product_price"],
-                product_quantity = row["product_quantity"],
-                date_updated = row["date_updated"]
-            ).execute()
-            print(f"created {row}")
-        except IntegrityError:
-            print(f"error so adding {row}")
-            product = Product.get(product_name=row["product_name"])
-            product.product_name = row["product_name"]
-            product.product_quantity = row["product_quantity"]
-            product.product_price = row["product_price"]
-            product.date_updated = row["date_updated"]
-            product.save()
 
 
 def show_by_id(id=None):
@@ -110,7 +91,7 @@ def show_by_id(id=None):
     #print error if ID doesn't exist
     while True:
         try:
-            prod_id = input("Enter product's ID: >> ")
+            prod_id = input("Find product by ID: >> ")
             prod_id = int(prod_id)
             break
         except ValueError:
@@ -131,12 +112,11 @@ def show_by_id(id=None):
 def add_item():
     """add item to inventory"""
 
-    #if dup found while trying to add, check which entry most recent and only save that data
     prod_name = input("Enter product name: >> ")
 
     while True:
         try:
-            prod_amount = input("Enter amount: >> ")
+            prod_amount = input("Enter quantity: >> ")
             prod_amount = int(prod_amount)
             break
         except ValueError:
@@ -145,7 +125,7 @@ def add_item():
 
     while True:
         try:
-            prod_price = input("Enter product price: >> ")
+            prod_price = input("Enter price: >> ")
             prod_price = float(prod_price)
             break
         except ValueError:
@@ -171,7 +151,7 @@ def backup_database():
     """backup the database"""
 
     headers = ["product_id", "product_name", "product_price", "product_quantity", "date_updated"]
-    print("backinig up db..")
+
     with open("db_backup.csv", 'w', newline="") as backup:
         dbwriter = csv.DictWriter(backup, fieldnames=headers)
         dbwriter.writeheader()
@@ -188,6 +168,8 @@ def backup_database():
 
     if not os.path.isfile("db_backup.csv"):
         print("Error during backup..")
+    else:
+        print("Database backed up to 'db_backup.csv'")
 
 
 
@@ -198,6 +180,7 @@ def escape():
 
 
 def clear():
+    """clears the console window"""
     os.system("cls" if os.name == "nt" else "clear")
 
 
