@@ -22,6 +22,7 @@ class Product(Model):
 
 
 def initialize():
+    """database connection and add items from the provided-CSV into the table"""
     db.connect()
     db.create_tables([Product], safe=True)
 
@@ -75,6 +76,7 @@ def fix_price(price):
 
 
 def fix_date(date):
+    """returns a datetime-formatted object"""
 
     return datetime.datetime.strptime(date, "%m/%d/%Y")
 
@@ -102,7 +104,7 @@ def show_by_id(id=None):
         print("Products found: ")
         for item in items:
             print(f"\tProduct name: {item.product_name}")
-            print(f"\tProduct price: {item.product_price}")
+            print(f"\tProduct price (in cents): {item.product_price}")
             print(f"\tProduct quantity: {item.product_quantity}")
             print(f"\tDate updated: {item.date_updated}")
     else:
@@ -126,7 +128,7 @@ def add_item():
     while True:
         try:
             prod_price = input("Enter price: >> ")
-            prod_price = float(prod_price)
+            prod_price = fix_price(prod_price)
             break
         except ValueError:
             print("ERROR: a NUMBER must be entered!")
